@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Radica Test</title>
+  </head>
+  <script>
+    var myArray = [
+      {
+        UserID: 1,
+        UserName: "Tom",
+        UserOccupation: "Executive Officer",
+      },
+      {
+        UserID: 2,
+        UserName: "Yan",
+        UserOccupation: "Software Guru",
+      },
+      {
+        UserID: 3,
+        UserName: "Faiz",
+        UserOccupation: "Software Ninja",
+      },
+    ];
+    console.table(myArray);
+  </script>
+
+  <body>
+    <br />
+
+    <!-- Input Box -->
+    <div>
+      <label for="userID">UserID</label><br />
+      <input type="text" id="UserID" value="" disabled /> &nbsp; &nbsp;
+
+      <input type="text" id="UserName" placeholder="UserName" /> &nbsp; &nbsp;
+      <input type="text" id="UserOccupation" placeholder="UserOccupation" />
+      &nbsp;
+      <input
+        type="submit"
+        name="submit"
+        value="Add"
+        onclick="addArray(myArray)"
+      />
+    </div>
+    <br /><br />
+
+    <!-- output -->
+    <div>
+      <label for="Sort">Sort by</label>
+      <select id="sort" onchange="selectSort()">
+        <option value="UserID">UserID</option>
+        <option value="UserName">UserName</option>
+        <option value="UserOccupation">UserOccupation</option>
+      </select>
+    </div>
+    <br />
+    <table border="1">
+      <tr>
+        <th>UserID</th>
+        <th>UserName</th>
+        <th>UserOccupation</th>
+      </tr>
+      <tbody id="tbody"></tbody>
+    </table>
+  </body>
+
+  <script>
+    function table(data) {
+      var row = "";
+      var table = document.getElementById("tbody");
+      table.innerHTML = "";
+      for (let index = 0; index < data.length; index++) {
+        row = `<tr>
+                        <td>${data[index].UserID}</td>
+                        <td>${data[index].UserName}</td>
+                        <td>${data[index].UserOccupation}</td>
+                    </tr>`;
+        table.innerHTML += row;
+      }
+    }
+
+    table(myArray);
+
+    function addArray(data) {
+      var username = document.getElementById("UserName").value;
+      var useroccupation = document.getElementById("UserOccupation").value;
+      var userid = data.length + 1;
+
+      myArray.push({
+        UserID: userid,
+        UserName: username,
+        UserOccupation: useroccupation,
+      });
+      table(data);
+    }
+
+    function selectSort() {
+      var selectedValue = document.getElementById("sort").value;
+      console.log(selectedValue);
+      switch (selectedValue) {
+        case UserName:
+          myArray = myArray.sort((a, b) =>
+            a[selectedValue] > b[selectedValue] ? 1 : -1
+          );
+          console.table(myArray);
+          table(myArray);
+          break;
+
+        case UserOccupation:
+          myArray = myArray.sort((a, b) =>
+            a[UserOccupation] > b[UserOccupation] ? 1 : -1
+          );
+          console.table(myArray);
+          table(myArray);
+          break;
+
+        default:
+          myArray = myArray.sort((a, b) => (a[UserID] > b[UserID] ? 1 : -1));
+          console.table(myArray);
+          table(myArray);
+          break;
+      }
+    }
+  </script>
+</html>
