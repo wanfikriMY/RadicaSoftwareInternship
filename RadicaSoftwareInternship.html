@@ -102,7 +102,7 @@
       switch (selectedValue) {
         case UserName:
           myArray = myArray.sort((a, b) =>
-            a[selectedValue] > b[selectedValue] ? 1 : -1
+            a[UserName] > b[UserName] ? 1 : -1
           );
           console.table(myArray);
           table(myArray);
